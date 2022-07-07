@@ -1,0 +1,9 @@
+.filter {
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 10px 40px;
+    font-size: 20px;
+
+}
