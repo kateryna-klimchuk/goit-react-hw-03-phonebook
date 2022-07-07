@@ -1,11 +1,40 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 
-import css from './App.module.css';
-
 import ContactForm from 'components/ContactForm';
 import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
+
+import styled from 'styled-components';
+
+
+const Title = styled.h1`
+  margin: 0;
+  padding: 20px;
+  font-size: 40px;
+`;
+
+const SectionName = styled.h2`
+  margin: 0;
+  padding: 20px;
+  font-size: 40px;
+`;
+
+const Container = styled.div`
+  height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+
+    color: rgb(78, 111, 111);
+    background-color: rgb(235, 251, 251);
+}
+`;
 
 class App extends Component {
   state = {
@@ -17,6 +46,19 @@ class App extends Component {
     ],
     filter: '',
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+    }
+  }
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+    if (parsedContacts) {
+    this.setState({ contacts: parsedContacts });
+    }
+  }
 
   addContact = ({ name, number }) => {
     const { contacts } = this.state;
@@ -58,16 +100,16 @@ class App extends Component {
     const visibleContacts = getVisibleContacts();
 
     return (
-      <div className={css.container}>
-        <h1>Phonebook</h1>
+      <Container>
+        <Title>Phonebook</Title>
         <ContactForm onSubmit={addContact} />
-        <h2>Contacts</h2>
+        <SectionName>Contacts</SectionName>
         <Filter filter={this.state.filter} onFilterSearch={changeFilter} />
         <ContactList
           contacts={visibleContacts}
           onDeleteContact={deleteContact}
         />
-      </div>
+      </Container>
     );
   }
 }
