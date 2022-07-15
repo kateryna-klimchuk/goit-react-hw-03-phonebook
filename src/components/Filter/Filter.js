@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { FilterDiv, Label, Input } from './FilterStyled';
+import { FilterDiv, Label, Input } from './Filter.Styled';
 
 const Filter = ({ filter, onFilterSearch }) => {
   return (

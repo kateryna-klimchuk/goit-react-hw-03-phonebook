@@ -5,7 +5,7 @@ import ContactForm from 'components/ContactForm';
 import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
 
-import { Title, SectionName, Container } from './AppStyled';
+import { Title, SectionName, Container } from './App.Styled';
 
 class App extends Component {
   state = {
@@ -24,8 +24,9 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
-    if (parsedContacts) {
+    const contacts = localStorage.getItem('contacts');
+    if (contacts) {
+      const parsedContacts = JSON.parse(contacts);
       this.setState({ contacts: parsedContacts });
     }
   }

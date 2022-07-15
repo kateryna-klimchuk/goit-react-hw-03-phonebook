@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
-import { Form, Input, Label, FormButton } from './ContactFormStyled';
+import { Form, Input, Label, FormButton } from './ContactForm.Styled';
 
 class ContactForm extends Component {
   state = {
